@@ -6,11 +6,13 @@ npm = require '../npm'
 
 module.exports =
   class ScriptsListView extends SelectListView
-    initialize: (@pkg) ->
+    initialize: () ->
       super
-      @data = pkg.scripts or {}
-      @setItems @parseData @data
-      @focusFilterEditor()
+      npm.getPackage().done (pkg) =>
+        @pkg = pkg
+        @data = pkg.scripts or {}
+        @setItems @parseData @data
+        @show()
 
     parseData: (scripts) -> keys(scripts).map (script, content) ->
       label: "Run #{script}"
