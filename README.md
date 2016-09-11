@@ -1,1 +1,3 @@
-# atom-npm-run
+# atom-npm
+
+NPM integration for Atom.

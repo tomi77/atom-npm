@@ -1,0 +1,35 @@
+{
+  "name": "atom-npm",
+  "main": "./lib/atom-npm",
+  "version": "0.1.0",
+  "description": "NPM integration for Atom",
+  "keywords": [
+    "atom",
+    "npm"
+  ],
+  "scripts": {
+    "q": "echo \"Test\" && echo \"Line 2\""
+  },
+  "activationCommands": {
+    "atom-workspace": [
+      "atom-npm:run",
+      "atom-npm:outdated",
+      "atom-npm:install",
+      "atom-npm:update"
+    ]
+  },
+  "repository": "https://github.com/atom/atom-npm",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "atom-space-pen-views": "^2.2.0",
+    "graceful-fs": "^4.1.6",
+    "lodash": "^4.15.0",
+    "nopt": "^3.0.6",
+    "npm": "^3.10.7",
+    "promise": "^7.1.1",
+    "read-package-json": "^2.0.4"
+  }
+}

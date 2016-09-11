@@ -1,0 +1,19 @@
+"menu": [
+  "label": "Packages"
+  "submenu": [
+    "label": "Atom NPM"
+    "submenu": [
+      "label": "Run"
+      "command": "atom-npm:run"
+    ,
+      "label": "Outdated"
+      "command": "atom-npm:outdated"
+    ,
+      "label": "Install"
+      "command": "atom-npm:install"
+    ,
+      "label": "Update"
+      "command": "atom-npm:update"
+    ]
+  ]
+]
