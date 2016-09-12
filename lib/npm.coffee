@@ -13,17 +13,14 @@ shorthands = configDefs.shorthands
 types = configDefs.types
 conf = nopt types, shorthands
 
-getNpm = (wd) ->
+getNpm = () ->
   new Promise (resolve, reject) ->
     npm.load conf, (err) ->
       if err then reject err
-      npm.localPrefix = wd
       resolve npm
     return
 
-getPackage = (npm) ->
-  pkgdir = npm.localPrefix
-
+getPackage = (npm, pkgdir) ->
   new Promise (resolve, reject) ->
     readJson path.resolve(pkgdir, 'package.json'), (err, pkg) ->
       if err then reject err
@@ -40,7 +37,7 @@ exec = (wd, pkg, script) ->
   out = spawnSync "npm #{script}", conf
 
 module.exports =
-  getPackage: (wd) -> getNpm(wd).then (npm) -> getPackage npm
+  getPackage: (wd) -> getNpm().then (npm) -> getPackage npm, wd
 
   run: (wd, pkg, script) -> exec wd, pkg, "run #{script}"
 
