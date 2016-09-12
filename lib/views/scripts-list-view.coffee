@@ -34,8 +34,8 @@ module.exports =
     viewForItem: ({script, pkg}) ->
       $$ ->
         @li =>
-          @span "Run #{script}"
-          @small style: 'color: #989898', " (#{pkg.name or pkg.wd})"
+          @div script
+          @div style: 'color: #989898', pkg.name or pkg.wd
 
     confirmed: ({script, pkg}) ->
       @cancel()
