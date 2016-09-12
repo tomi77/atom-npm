@@ -1,3 +1,9 @@
+".platform-darwin":
+  "cmd-alt-n r": "atom-npm:run"
+  "cmd-alt-n i": "atom-npm:install"
+  "cmd-alt-n u": "atom-npm:update"
+  "cmd-alt-n o": "atom-npm:outdated"
+
 ".platform-linux, .platform-win32":
   "ctrl-alt-n r": "atom-npm:run"
   "ctrl-alt-n i": "atom-npm:install"
