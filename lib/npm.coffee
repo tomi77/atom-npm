@@ -13,11 +13,11 @@ shorthands = configDefs.shorthands
 types = configDefs.types
 conf = nopt types, shorthands
 
-getNpm = () ->
+getNpm = (wd) ->
   new Promise (resolve, reject) ->
     npm.load conf, (err) ->
       if err then reject err
-      npm.localPrefix = atom.project.getDirectories()[0].path
+      npm.localPrefix = wd
       resolve npm
     return
 
@@ -40,7 +40,7 @@ exec = (wd, pkg, script) ->
   out = spawnSync "npm #{script}", conf
 
 module.exports =
-  getPackage: () -> getNpm().then (npm) -> getPackage npm
+  getPackage: (wd) -> getNpm(wd).then (npm) -> getPackage npm
 
   run: (wd, pkg, script) -> exec wd, pkg, "run #{script}"
 

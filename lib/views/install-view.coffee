@@ -3,7 +3,7 @@ npm = require '../npm'
 module.exports = class InstallView
   constructor: () ->
     atom.notifications.addInfo 'Run "npm install"'
-    npm.getPackage().done (pkg) =>
+    npm.getPackage(atom.project.getDirectories()[0].path).done (pkg) =>
       out = npm.install atom.project.getDirectories()[0].path, pkg
 
       if out.status

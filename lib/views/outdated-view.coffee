@@ -3,7 +3,7 @@ npm = require '../npm'
 module.exports = class OutdatedView
   constructor: () ->
     atom.notifications.addInfo 'Run "npm outdated"'
-    npm.getPackage().done (pkg) =>
+    npm.getPackage(atom.project.getDirectories()[0].path).done (pkg) =>
       out = npm.outdated atom.project.getDirectories()[0].path, pkg
 
       if out.status

@@ -8,7 +8,7 @@ module.exports =
   class ScriptsListView extends SelectListView
     initialize: () ->
       super
-      npm.getPackage().done (pkg) =>
+      npm.getPackage(atom.project.getDirectories()[0].path).done (pkg) =>
         @pkg = pkg
         @data = pkg.scripts or {}
         @setItems @parseData @data
