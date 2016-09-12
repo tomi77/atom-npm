@@ -5,9 +5,10 @@ module.exports = class OutdatedView
     atom.notifications.addInfo 'Run "npm outdated"'
     npm.getPackage().done (pkg) =>
       out = npm.outdated atom.project.getDirectories()[0].path, pkg
-      @show out.toString()
-      return
 
-  show: (txt) ->
-    atom.notifications.addSuccess "npm outdated", detail: txt, dismissable: yes
-    return
+      if out.status
+        atom.notifications.addError "npm outdated", detail: out.stdout.toString(), dismissable: yes
+      else
+        atom.notifications.addSuccess "npm outdated", detail: out.stdout.toString(), dismissable: yes
+
+      return

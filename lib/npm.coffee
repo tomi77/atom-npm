@@ -1,5 +1,5 @@
 path = require 'path'
-{execSync} = require 'child_process'
+{spawnSync} = require 'child_process'
 
 npm = require 'npm/lib/npm'
 npmconf = require 'npm/lib/config/core'
@@ -33,11 +33,11 @@ getPackage = (npm) ->
 exec = (wd, pkg, script) ->
   env = makeEnv pkg
 
-  conf = cwd: wd, env: env
+  conf = cwd: wd, env: env, shell: yes
 
   if process.platform is 'win32' then conf.windowsVerbatimArguments = true
 
-  out = execSync "npm #{script}", conf
+  out = spawnSync "npm #{script}", conf
 
 module.exports =
   getPackage: () -> getNpm().then (npm) -> getPackage npm

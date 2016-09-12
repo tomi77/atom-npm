@@ -36,6 +36,10 @@ module.exports =
 
     confirmed: ({script}) ->
       @cancel()
+
       out = npm.run atom.project.getDirectories()[0].path, @pkg, script
 
-      atom.notifications.addSuccess "npm run #{script}", detail: out.toString(), dismissable: yes
+      if out.status
+        atom.notifications.addError "npm run #{script}", detail: out.stdout.toString(), dismissable: yes
+      else
+        atom.notifications.addSuccess "npm run #{script}", detail: out.stdout.toString(), dismissable: yes

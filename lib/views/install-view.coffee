@@ -5,9 +5,10 @@ module.exports = class InstallView
     atom.notifications.addInfo 'Run "npm install"'
     npm.getPackage().done (pkg) =>
       out = npm.install atom.project.getDirectories()[0].path, pkg
-      @show out.toString()
-      return
 
-  show: (txt) ->
-    atom.notifications.addSuccess "npm install", detail: txt, dismissable: yes
-    return
+      if out.status
+        atom.notifications.addError "npm install", detail: out.stdout.toString(), dismissable: yes
+      else
+        atom.notifications.addSuccess "npm install", detail: out.stdout.toString(), dismissable: yes
+
+      return
