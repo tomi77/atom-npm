@@ -1,6 +1,5 @@
 {$$, SelectListView} = require 'atom-space-pen-views'
 keys = require 'lodash/keys'
-{makeEnv} = require 'npm/lib/utils/lifecycle'
 {execSync} = require 'child_process'
 Promise = require 'promise'
 npm = require '../npm'
@@ -9,23 +8,19 @@ module.exports =
   class ScriptsListView extends SelectListView
     initialize: () ->
       super
-      @data = {}
-      pkgs = atom.project.getDirectories().map (dir) ->
-        npm.getPackage dir.path
-        .then (pkg) -> pkg: pkg, wd: dir.path
+      pkgs = atom.project.getDirectories().map (dir) -> npm.getPackage dir.path
       Promise.all(pkgs).done (pkgs) =>
-        @data = pkgs.reduce (data, pkg) =>
-          data.concat @parseData pkg.pkg.scripts or {}, pkg.wd, pkg.pkg
+        data = pkgs.reduce (data, pkg) =>
+          data.concat @parseData pkg
         , []
-        @setItems @data
+        @setItems data
         @show()
 
-    parseData: (scripts, wd, pkg) -> keys(scripts).map (script, content) ->
+    parseData: (pkg) -> keys(pkg.scripts or {}).map (script) ->
       script: script
-      wd: wd
       pkg: pkg
 
-    getFilterKey: () -> 'name'
+    getFilterKey: () -> 'script'
 
     show: () ->
       @panel ?= atom.workspace.addModalPanel item: @
@@ -36,22 +31,22 @@ module.exports =
 
     hide: () -> @panel?.destroy()
 
-    viewForItem: ({label, script, pkg, wd}) ->
+    viewForItem: ({script, pkg}) ->
       $$ ->
         @li =>
           @span "Run #{script}"
-          @small style: 'color: #989898', " (#{pkg.name or wd})"
+          @small style: 'color: #989898', " (#{pkg.name or pkg.wd})"
 
-    confirmed: ({script, wd, pkg}) ->
+    confirmed: ({script, pkg}) ->
       @cancel()
 
-      out = npm.run wd, pkg, script
+      out = pkg.run script
 
       if out.status
-        atom.notifications.addError "npm run #{script} (#{pkg.name or wd})",
+        atom.notifications.addError "npm run #{script} (#{pkg.name or pkg.wd})",
           detail: out.stdout.toString(),
           dismissable: yes
       else
-        atom.notifications.addSuccess "npm run #{script} (#{pkg.name or wd})",
+        atom.notifications.addSuccess "npm run #{script} (#{pkg.name or pkg.wd})",
           detail: out.stdout.toString(),
           dismissable: yes

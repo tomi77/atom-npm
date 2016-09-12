@@ -7,6 +7,7 @@ npmconf = require 'npm/lib/config/core'
 Promise = require 'promise'
 readJson = require 'read-package-json'
 nopt = require 'nopt'
+extend = require 'lodash/extend'
 
 configDefs = npmconf.defs
 shorthands = configDefs.shorthands
@@ -24,8 +25,27 @@ getPackage = (npm, pkgdir) ->
   new Promise (resolve, reject) ->
     readJson path.resolve(pkgdir, 'package.json'), (err, pkg) ->
       if err then reject err
-      resolve pkg
+      resolve new Package npm, pkgdir, pkg
     return
+
+class Package
+  constructor: (@npm, @wd, pkg) ->
+    extend @, pkg
+
+    env = makeEnv pkg
+    @conf = cwd: @wd, env: env, shell: yes
+
+    if process.platform is 'win32' then conf.windowsVerbatimArguments = true
+
+  exec: (script) -> spawnSync "npm #{script}", @conf
+
+  run: (script) -> @exec "run #{script}"
+
+  outdated: () -> @exec 'outdated'
+
+  install: () -> @exec 'install'
+
+  update: () -> @exec 'update'
 
 exec = (wd, pkg, script) ->
   env = makeEnv pkg
@@ -38,11 +58,3 @@ exec = (wd, pkg, script) ->
 
 module.exports =
   getPackage: (wd) -> getNpm().then (npm) -> getPackage npm, wd
-
-  run: (wd, pkg, script) -> exec wd, pkg, "run #{script}"
-
-  outdated: (wd, pkg) -> exec wd, pkg, 'outdated'
-
-  install: (wd, pkg) -> exec wd, pkg, 'install'
-
-  update: (wd, pkg) -> exec wd, pkg, 'update'
