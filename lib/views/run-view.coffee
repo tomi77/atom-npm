@@ -4,7 +4,7 @@ Promise = require 'promise'
 npm = require '../npm'
 
 module.exports =
-  class ScriptsListView extends SelectListView
+  class RunView extends SelectListView
     initialize: () ->
       super
       pkgs = atom.project.getDirectories().map (dir) -> npm.getPackage dir.path
