@@ -41,9 +41,9 @@ module.exports =
 
       if out.status
         atom.notifications.addError "npm run #{script} (#{pkg.name or pkg.wd})",
-          detail: out.stdout.toString(),
+          detail: out.stdout.toString()
           dismissable: yes
       else
         atom.notifications.addSuccess "npm run #{script} (#{pkg.name or pkg.wd})",
-          detail: out.stdout.toString(),
+          detail: out.stdout.toString()
           dismissable: yes
