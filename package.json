@@ -15,7 +15,7 @@
       "atom-npm:update"
     ]
   },
-  "repository": "https://github.com/atom/atom-npm",
+  "repository": "https://github.com/tomi77/atom-npm.git",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
