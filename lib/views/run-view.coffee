@@ -1,25 +1,23 @@
 {$$, SelectListView} = require 'atom-space-pen-views'
 keys = require 'lodash/keys'
-Promise = require 'promise'
-npm = require '../npm'
 
 module.exports =
   class RunView extends SelectListView
-    initialize: () ->
+    initialize: (pkgs) ->
       super
-      pkgs = atom.project.getDirectories().map (dir) -> npm.getPackage dir.path
-      Promise.all(pkgs).done (pkgs) =>
-        data = pkgs.reduce (data, pkg) =>
-          data.concat @parseData pkg
-        , []
-        @setItems data
-        @show()
+      data = pkgs.reduce (data, pkg) =>
+        data.concat @parseData pkg
+      , []
+      @setItems data
+      @show()
 
     parseData: (pkg) -> keys(pkg.scripts or {}).map (script) ->
+      filter: "#{script} #{pkg.name or pkg.wd}"
+      label: script
       script: script
       pkg: pkg
 
-    getFilterKey: () -> 'script'
+    getFilterKey: () -> 'filter'
 
     show: () ->
       @panel ?= atom.workspace.addModalPanel item: @
@@ -30,10 +28,10 @@ module.exports =
 
     hide: () -> @panel?.destroy()
 
-    viewForItem: ({script, pkg}) ->
+    viewForItem: ({label, pkg}) ->
       $$ ->
         @li =>
-          @div script
+          @div label
           @div style: 'color: #989898', pkg.name or pkg.wd
 
     confirmed: ({script, pkg}) ->

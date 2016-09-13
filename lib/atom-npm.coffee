@@ -4,6 +4,8 @@ RunView = require './views/run-view'
 OutdatedView = require './views/outdated-view'
 InstallView = require './views/install-view'
 UpdateView = require './views/update-view'
+Promise = require 'promise'
+npm = require './npm'
 
 module.exports =
   subscriptions: null
@@ -13,13 +15,19 @@ module.exports =
     @subscriptions = new CompositeDisposable()
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-npm:run': () -> new RunView()
-    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-npm:outdated': () -> new OutdatedView()
-    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-npm:install': () -> new InstallView()
-    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-npm:update': () -> new UpdateView()
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'atom-npm:run': () => @getPackages().done (pkgs) -> new RunView pkgs
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'atom-npm:outdated': () => @getPackages().done (pkgs) -> new OutdatedView pkgs
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'atom-npm:install': () => @getPackages().done (pkgs) -> new InstallView pkgs
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'atom-npm:update': () => @getPackages().done (pkgs) -> new UpdateView pkgs
 
     return
 
   deactivate: () ->
     @subscriptions.dispose()
     return
+
+  getPackages: () -> Promise.all atom.project.getDirectories().map (dir) -> npm.getPackage dir.path

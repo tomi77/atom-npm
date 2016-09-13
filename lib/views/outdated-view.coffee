@@ -1,14 +1,13 @@
-npm = require '../npm'
+keys = require 'lodash/keys'
+BaseView = require './base-view'
 
-module.exports = class OutdatedView
-  constructor: () ->
-    atom.notifications.addInfo 'Run "npm outdated"'
-    npm.getPackage(atom.project.getDirectories()[0].path).done (pkg) =>
-      out = pkg.outdated()
+module.exports = class OutdatedView extends BaseView
+  prepareData: (pkgs) ->
+    pkgs.filter (pkg) -> keys(pkg).length > 0
+    .map (pkg) => @parseData pkg
 
-      if out.status
-        atom.notifications.addError "npm outdated", detail: out.stdout.toString(), dismissable: yes
-      else
-        atom.notifications.addSuccess "npm outdated", detail: out.stdout.toString(), dismissable: yes
+  getLabel: () -> 'outdated'
 
-      return
+  getNotificationTitle: (pkg) -> "npm outdated @ #{pkg.name or pkg.wd}"
+
+  getResult: (pkg) -> pkg.outdated()

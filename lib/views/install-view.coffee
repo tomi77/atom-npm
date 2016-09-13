@@ -1,14 +1,13 @@
-npm = require '../npm'
+keys = require 'lodash/keys'
+BaseView = require './base-view'
 
-module.exports = class InstallView
-  constructor: () ->
-    atom.notifications.addInfo 'Run "npm install"'
-    npm.getPackage(atom.project.getDirectories()[0].path).done (pkg) =>
-      out = pkg.install()
+module.exports = class InstallView extends BaseView
+  prepareData: (pkgs) ->
+    pkgs.filter (pkg) -> keys(pkg).length > 0
+    .map (pkg) => @parseData pkg
 
-      if out.status
-        atom.notifications.addError "npm install", detail: out.stdout.toString(), dismissable: yes
-      else
-        atom.notifications.addSuccess "npm install", detail: out.stdout.toString(), dismissable: yes
+  getLabel: () -> 'install'
 
-      return
+  getNotificationTitle: (pkg) -> "npm install @ #{pkg.name or pkg.wd}"
+
+  getResult: (pkg) -> pkg.install()
