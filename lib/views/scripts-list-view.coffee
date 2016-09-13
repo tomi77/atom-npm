@@ -1,6 +1,5 @@
 {$$, SelectListView} = require 'atom-space-pen-views'
 keys = require 'lodash/keys'
-{execSync} = require 'child_process'
 Promise = require 'promise'
 npm = require '../npm'
 
