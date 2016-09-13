@@ -7,9 +7,6 @@
     "atom",
     "npm"
   ],
-  "scripts": {
-    "q": "echo \"Test\" && echo \"Line 2\""
-  },
   "activationCommands": {
     "atom-workspace": [
       "atom-npm:run",
