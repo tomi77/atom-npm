@@ -1,5 +1,7 @@
 # atom-npm
 
+[![dependencies Status](https://david-dm.org/tomi77/atom-npm/status.svg)](https://david-dm.org/tomi77/atom-npm)
+
 NPM integration for Atom.
 
 ## Commands
