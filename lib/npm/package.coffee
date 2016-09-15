@@ -39,6 +39,14 @@ module.exports = class Package extends EventEmitter
 
   outdated: () -> @exec ['outdated']
 
-  install: () -> @exec ['install']
+  install: (name) ->
+    if name?
+      @exec ['install', name]
+    else
+      @exec ['install']
 
-  update: () -> @exec ['update']
+  update: (name) ->
+    if name?
+      @exec ['update', name]
+    else
+      @exec ['update']
