@@ -1,7 +1,7 @@
 {
   "name": "atom-npm",
   "main": "./lib/atom-npm",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "NPM integration for Atom",
   "keywords": [
     "atom",
