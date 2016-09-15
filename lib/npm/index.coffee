@@ -28,4 +28,6 @@ getPackage = (npm, pkgdir) ->
     return
 
 module.exports =
+  getNpm: getNpm
+  
   getPackage: (wd) -> getNpm().then (npm) -> getPackage npm, wd
