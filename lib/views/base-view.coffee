@@ -43,13 +43,20 @@ module.exports = class BaseView extends SelectListView
   confirmed: ({pkg}) ->
     @cancel()
 
-    out = @getResult pkg
+    info = atom.notifications.addInfo @getNotificationTitle(pkg),
+      detail: "Running..."
+      dismissable: yes
 
-    if out.status
-      atom.notifications.addError @getNotificationTitle(pkg),
-        detail: out.stdout.toString(),
-        dismissable: yes
-    else
-      atom.notifications.addSuccess @getNotificationTitle(pkg),
-        detail: out.stdout.toString(),
-        dismissable: yes
+    pkg.once 'exit', (status, stdout, stderr) =>
+      info.dismiss()
+
+      if status
+        atom.notifications.addError @getNotificationTitle(pkg),
+          detail: stderr
+          dismissable: yes
+      else
+        atom.notifications.addSuccess @getNotificationTitle(pkg),
+          detail: stdout
+          dismissable: yes
+
+    @getResult pkg

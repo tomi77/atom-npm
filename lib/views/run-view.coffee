@@ -23,6 +23,7 @@ module.exports =
       @panel ?= atom.workspace.addModalPanel item: @
       @panel.show()
       @focusFilterEditor()
+      return
 
     cancelled: () -> @hide()
 
@@ -37,13 +38,21 @@ module.exports =
     confirmed: ({script, pkg}) ->
       @cancel()
 
-      out = pkg.run script
+      info = atom.notifications.addInfo "npm run #{script} (#{pkg.name or pkg.wd})",
+        detail: "Running..."
+        dismissable: yes
 
-      if out.status
-        atom.notifications.addError "npm run #{script} (#{pkg.name or pkg.wd})",
-          detail: out.stdout.toString()
-          dismissable: yes
-      else
-        atom.notifications.addSuccess "npm run #{script} (#{pkg.name or pkg.wd})",
-          detail: out.stdout.toString()
-          dismissable: yes
+      pkg.once 'exit', (status, stdout, stderr) =>
+        info.dismiss()
+
+        if status
+          atom.notifications.addError "npm run #{script} (#{pkg.name or pkg.wd})",
+            detail: stdout
+            dismissable: yes
+        else
+          atom.notifications.addSuccess "npm run #{script} (#{pkg.name or pkg.wd})",
+            detail: stdout
+            dismissable: yes
+
+      pkg.run script
+      return
