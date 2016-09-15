@@ -16,21 +16,21 @@ module.exports = class Package extends EventEmitter
     return
 
   exec: (script) ->
-    @stdoutBuffer = []
-    @stderrBuffer = []
+    stdoutBuffer = []
+    stderrBuffer = []
 
     new BufferedProcess
       command: "npm"
       args: script
       options: @conf
-      stdout: (output) =>
-        @stdoutBuffer = @stdoutBuffer.concat output
+      stdout: (output) ->
+        stdoutBuffer = stdoutBuffer.concat output
         return
-      stderr: (output) =>
-        @stderrBuffer = @stderrBuffer.concat output
+      stderr: (output) ->
+        stderrBuffer = stderrBuffer.concat output
         return
       exit: (code) =>
-        @emit 'exit', code, @stdoutBuffer.join('\n'), @stderrBuffer.join('\n')
+        @emit 'exit', code, stdoutBuffer.join('\n'), stderrBuffer.join('\n')
         return
 
     return
@@ -39,14 +39,6 @@ module.exports = class Package extends EventEmitter
 
   outdated: () -> @exec ['outdated']
 
-  install: (name) ->
-    if name?
-      @exec ['install', name]
-    else
-      @exec ['install']
+  install: (name) -> @exec if name? then ['install', name] else ['install']
 
-  update: (name) ->
-    if name?
-      @exec ['update', name]
-    else
-      @exec ['update']
+  update: (name) -> @exec if name? then ['update', name] else ['update']
