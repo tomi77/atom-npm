@@ -23,11 +23,11 @@ getNpm = () ->
 getPackage = (npm, pkgdir) ->
   new Promise (resolve, reject) ->
     readJson path.resolve(pkgdir, 'package.json'), (err, pkg) ->
-      resolve if err then {} else new Package pkgdir, pkg
+      resolve if err then {} else new Package pkgdir, pkg, npm
       return
     return
 
 module.exports =
   getNpm: getNpm
-  
+
   getPackage: (wd) -> getNpm().then (npm) -> getPackage npm, wd

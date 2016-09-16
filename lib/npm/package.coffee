@@ -5,7 +5,7 @@ EventEmitter = require 'events'
 extend = require 'lodash/extend'
 
 module.exports = class Package extends EventEmitter
-  constructor: (@wd, pkg) ->
+  constructor: (@wd, pkg, @npm) ->
     extend @, pkg
 
     env = makeEnv pkg
