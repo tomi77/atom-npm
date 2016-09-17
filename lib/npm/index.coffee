@@ -1,21 +1,14 @@
 path = require 'path'
 
 npm = require 'npm/lib/npm'
-npmconf = require 'npm/lib/config/core'
 Promise = require 'promise'
 readJson = require 'read-package-json'
-nopt = require 'nopt'
 
 Package = require './package'
 
-configDefs = npmconf.defs
-shorthands = configDefs.shorthands
-types = configDefs.types
-conf = nopt types, shorthands
-
 getNpm = () ->
   new Promise (resolve, reject) ->
-    npm.load conf, (err) ->
+    npm.load (err) ->
       if err then reject err
       resolve npm
     return

@@ -4,7 +4,6 @@
   "version": "0.2.0",
   "description": "NPM integration for Atom",
   "keywords": [
-    "atom",
     "npm"
   ],
   "activationCommands": {
@@ -22,9 +21,7 @@
   },
   "dependencies": {
     "atom-space-pen-views": "^2.2.0",
-    "graceful-fs": "^4.1.6",
     "lodash": "^4.15.0",
-    "nopt": "^3.0.6",
     "npm": "^3.10.7",
     "promise": "^7.1.1",
     "read-package-json": "^2.0.4"
