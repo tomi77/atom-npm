@@ -9,10 +9,10 @@ NPM integration for Atom.
 
 | Command            | Effect                                                            | Default Windows/Linux key binding | Default MacOS X key binding |
 |--------------------|-------------------------------------------------------------------|-----------------------------------|-----------------------------|
-| `NPM install`      | Install dependencies from `package.json` or `npm-shrinkwrap.json` | `Ctrl-Alt-n i`                    | `Cmd-Alt-n i`               |
-| `NPM update`       | Update installed packages                                         | `Ctrl-Alt-n u`                    | `Cmd-Alt-n u`               |
-| `NPM outdated`     | List of outdated packages                                         | `Ctrl-Alt-n o`                    | `Cmd-Alt-n o`               |
-| `NPM run <script>` | Run script                                                        | `Ctrl-Alt-n r`                    | `Cmd-Alt-n r`               |
+| `npm install`      | Install dependencies from `package.json` or `npm-shrinkwrap.json` | `Ctrl+Alt+N I`                    | `Cmd+Alt+N I`               |
+| `npm update`       | Update installed packages                                         | `Ctrl+Alt+N U`                    | `Cmd+Alt+N U`               |
+| `npm outdated`     | List of outdated packages                                         | `Ctrl+Alt+N O`                    | `Cmd+Alt+N O`               |
+| `npm run <script>` | Run script                                                        | `Ctrl+Alt+N R`                    | `Cmd+Alt+N R`               |
 
 ## Multi-project support
 
