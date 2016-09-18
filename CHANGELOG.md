@@ -1,4 +1,4 @@
-## master
+## 0.3.0
 
 * Rewrite `outdated` - use API instead of `BufferedProcess`
 * List outdated packages in list (not in notification)
