@@ -17,7 +17,7 @@ module.exports = class OutdatedView extends BaseView
 
   parseResult: (pkg, list) ->
     if list.length is 0
-      atom.notifications.addInfo @getNotificationTitle(),
+      atom.notifications.addInfo @getNotificationTitle(pkg),
         detail: "Everything is up-to-date"
     else
       new OutdatedListView pkg, list
