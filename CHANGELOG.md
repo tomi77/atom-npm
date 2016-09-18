@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Fix outdated
+
 ## 0.3.0
 
 * Rewrite `outdated` - use API instead of `BufferedProcess`
