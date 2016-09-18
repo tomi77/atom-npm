@@ -9,11 +9,11 @@
       "label": "Outdated"
       "command": "atom-npm:outdated"
     ,
-      "label": "Install"
-      "command": "atom-npm:install"
+      "label": "Install Dependencies"
+      "command": "atom-npm:install-dependencies"
     ,
-      "label": "Update"
-      "command": "atom-npm:update"
+      "label": "Update Dependencies"
+      "command": "atom-npm:update-dependencies"
     ]
   ]
 ]

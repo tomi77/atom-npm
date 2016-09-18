@@ -1,7 +1,7 @@
 keys = require 'lodash/keys'
 BaseView = require './base-view'
 
-module.exports = class InstallView extends BaseView
+module.exports = class InstallDependenciesView extends BaseView
   prepareData: (pkgs) ->
     pkgs.filter (pkg) -> keys(pkg).length > 0
     .map (pkg) => @parseData pkg

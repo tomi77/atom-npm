@@ -5,6 +5,8 @@
 * Allow to update outdated package from list
 * Rewrite `update` - use API instead of `BufferedProcess`
 * Rewrite `install` - use API instead of `BufferedProcess`
+* Rename `install` to `install-dependencies`
+* Rename `update` to `update-dependencies`
 
 ## 0.2.0
 

@@ -2,8 +2,8 @@
 
 RunView = require './views/run-view'
 OutdatedView = require './views/outdated-view'
-InstallView = require './views/install-view'
-UpdateView = require './views/update-view'
+InstallDependenciesView = require './views/install-dependencies-view'
+UpdateDependenciesView = require './views/update-dependencies-view'
 Promise = require 'promise'
 npm = require './npm'
 
@@ -20,9 +20,9 @@ module.exports =
     @subscriptions.add atom.commands.add 'atom-workspace',
       'atom-npm:outdated': () => @getPackages().done (pkgs) -> new OutdatedView pkgs
     @subscriptions.add atom.commands.add 'atom-workspace',
-      'atom-npm:install': () => @getPackages().done (pkgs) -> new InstallView pkgs
+      'atom-npm:install-dependencies': () => @getPackages().done (pkgs) -> new InstallDependenciesView pkgs
     @subscriptions.add atom.commands.add 'atom-workspace',
-      'atom-npm:update': () => @getPackages().done (pkgs) -> new UpdateView pkgs
+      'atom-npm:update-dependencies': () => @getPackages().done (pkgs) -> new UpdateDependenciesView pkgs
 
     return
 

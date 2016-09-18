@@ -10,8 +10,8 @@
     "atom-workspace": [
       "atom-npm:run",
       "atom-npm:outdated",
-      "atom-npm:install",
-      "atom-npm:update"
+      "atom-npm:install-dependencies",
+      "atom-npm:update-dependencies"
     ]
   },
   "repository": "https://github.com/tomi77/atom-npm.git",
