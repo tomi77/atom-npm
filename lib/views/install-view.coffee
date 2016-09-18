@@ -11,3 +11,7 @@ module.exports = class InstallView extends BaseView
   getNotificationTitle: (pkg) -> "npm install @ #{pkg.name or pkg.wd}"
 
   getResult: (pkg) -> pkg.install()
+
+  parseResult: (pkg) ->
+    atom.notifications.addSuccess @getNotificationTitle(pkg),
+      detail: "Install finished successfully"

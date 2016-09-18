@@ -3,6 +3,7 @@ EventEmitter = require 'events'
 
 {makeEnv} = require 'npm/lib/utils/lifecycle'
 extend = require 'lodash/extend'
+Promise = require 'promise'
 
 module.exports = class Package extends EventEmitter
   constructor: (@wd, pkg, @npm) ->
@@ -15,13 +16,13 @@ module.exports = class Package extends EventEmitter
 
     return
 
-  exec: (script) ->
+  run: (script) ->
     stdoutBuffer = []
     stderrBuffer = []
 
     new BufferedProcess
-      command: "npm"
-      args: script
+      command: 'npm'
+      args: ['run', script]
       options: @conf
       stdout: (output) ->
         stdoutBuffer = stdoutBuffer.concat output
@@ -35,10 +36,22 @@ module.exports = class Package extends EventEmitter
 
     return
 
-  run: (script) -> @exec ['run', script]
+  outdated: () ->
+    new Promise (resolve, reject) =>
+      @npm.prefix = @wd
+      outdated = require 'npm/lib/outdated'
+      outdated {}, (_, list) -> resolve list
 
-  outdated: () -> @exec ['outdated']
+  install: (name) ->
+    name or= []
+    new Promise (resolve, reject) =>
+      @npm.prefix = @wd
+      install = require 'npm/lib/install'
+      install name, (err) -> unless err? then resolve() else reject err
 
-  install: (name) -> @exec if name? then ['install', name] else ['install']
-
-  update: (name) -> @exec if name? then ['update', name] else ['update']
+  update: (name) ->
+    name or= []
+    new Promise (resolve, reject) =>
+      @npm.prefix = @wd
+      update = require 'npm/lib/update'
+      update name, (err) -> unless err? then resolve() else reject err

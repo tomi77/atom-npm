@@ -11,3 +11,7 @@ module.exports = class UpdateView extends BaseView
   getNotificationTitle: (pkg) -> "npm update @ #{pkg.name or pkg.wd}"
 
   getResult: (pkg) -> pkg.update()
+
+  parseResult: (pkg) ->
+    atom.notifications.addSuccess @getNotificationTitle(pkg),
+      detail: "Update finished successfully"

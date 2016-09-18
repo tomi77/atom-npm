@@ -40,6 +40,8 @@ module.exports = class BaseView extends SelectListView
 
   getResult: (pkg) -> throw new Error "getResult is not implemented"
 
+  parseResult: (result) -> throw new Error "parseResult is not implemented"
+
   confirmed: ({pkg}) ->
     @cancel()
 
@@ -47,16 +49,15 @@ module.exports = class BaseView extends SelectListView
       detail: "Running..."
       dismissable: yes
 
-    pkg.once 'exit', (status, stdout, stderr) =>
+    @getResult pkg
+    .then (args...) =>
       info.dismiss()
 
-      if status
-        atom.notifications.addError @getNotificationTitle(pkg),
-          detail: stderr
-          dismissable: yes
-      else
-        atom.notifications.addSuccess @getNotificationTitle(pkg),
-          detail: stdout
-          dismissable: yes
+      @parseResult.apply @, [pkg].concat args
+    .catch (err) =>
+      info.dismiss()
+      console.debug err
 
-    @getResult pkg
+      atom.notifications.addError @getNotificationTitle(pkg),
+        detail: err
+        dismissable: yes
