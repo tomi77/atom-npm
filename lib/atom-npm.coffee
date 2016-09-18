@@ -17,11 +17,8 @@ module.exports =
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace',
       'atom-npm:run': () => @getPackages().done (pkgs) -> new RunView pkgs
-    @subscriptions.add atom.commands.add 'atom-workspace',
       'atom-npm:outdated': () => @getPackages().done (pkgs) -> new OutdatedView pkgs
-    @subscriptions.add atom.commands.add 'atom-workspace',
       'atom-npm:install-dependencies': () => @getPackages().done (pkgs) -> new InstallDependenciesView pkgs
-    @subscriptions.add atom.commands.add 'atom-workspace',
       'atom-npm:update-dependencies': () => @getPackages().done (pkgs) -> new UpdateDependenciesView pkgs
 
     return
