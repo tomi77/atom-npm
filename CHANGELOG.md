@@ -1,3 +1,7 @@
+## master
+
+* extract `npm-client-api` to it's own package
+
 ## 0.3.1
 
 * Fix outdated

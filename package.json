@@ -20,10 +20,9 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "atom-npm-client-api": "^0.1.0",
     "atom-space-pen-views": "^2.2.0",
     "lodash": "^4.15.0",
-    "npm": "^3.10.7",
-    "promise": "^7.1.1",
-    "read-package-json": "^2.0.4"
+    "promise": "^7.1.1"
   }
 }

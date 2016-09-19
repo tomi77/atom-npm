@@ -5,7 +5,7 @@ OutdatedView = require './views/outdated-view'
 InstallDependenciesView = require './views/install-dependencies-view'
 UpdateDependenciesView = require './views/update-dependencies-view'
 Promise = require 'promise'
-npm = require './npm'
+{getPackage} = require 'atom-npm-client-api'
 
 module.exports =
   subscriptions: null
@@ -27,4 +27,4 @@ module.exports =
     @subscriptions.dispose()
     return
 
-  getPackages: () -> Promise.all atom.project.getDirectories().map (dir) -> npm.getPackage dir.path
+  getPackages: () -> Promise.all atom.project.getDirectories().map (dir) -> getPackage dir.path

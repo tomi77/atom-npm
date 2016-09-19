@@ -2,7 +2,7 @@ keys = require 'lodash/keys'
 Promise = require 'promise'
 BaseView = require './base-view'
 OutdatedListView = require './outdated-list-view'
-{getNpm} = require '../npm'
+{getNpm} = require 'atom-npm-client-api'
 
 module.exports = class OutdatedView extends BaseView
   prepareData: (pkgs) ->
