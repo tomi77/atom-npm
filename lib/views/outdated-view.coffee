@@ -1,5 +1,4 @@
 keys = require 'lodash/keys'
-Promise = require 'promise'
 BaseView = require './base-view'
 OutdatedListView = require './outdated-list-view'
 
