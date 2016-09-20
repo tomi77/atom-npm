@@ -7,12 +7,12 @@ NPM integration for Atom.
 
 ## Commands
 
-| Command            | Effect                                                            | Default Windows/Linux key binding | Default MacOS X key binding |
-|--------------------|-------------------------------------------------------------------|-----------------------------------|-----------------------------|
-| `npm install`      | Install dependencies from `package.json` or `npm-shrinkwrap.json` | `Ctrl+Alt+N I`                    | `Cmd+Alt+N I`               |
-| `npm update`       | Update installed packages                                         | `Ctrl+Alt+N U`                    | `Cmd+Alt+N U`               |
-| `npm outdated`     | List of outdated packages                                         | `Ctrl+Alt+N O`                    | `Cmd+Alt+N O`               |
-| `npm run <script>` | Run script                                                        | `Ctrl+Alt+N R`                    | `Cmd+Alt+N R`               |
+| Command                         | Effect                                                            | Default Windows/Linux key binding | Default MacOS X key binding |
+|---------------------------------|-------------------------------------------------------------------|-----------------------------------|-----------------------------|
+| `atom-npm:install-dependencies` | Install dependencies from `package.json` or `npm-shrinkwrap.json` | `Ctrl+Alt+N I`                    | `Cmd+Alt+N I`               |
+| `atom-npm:update-dependencies`  | Update installed packages                                         | `Ctrl+Alt+N U`                    | `Cmd+Alt+N U`               |
+| `atom-npm:outdated`             | List of outdated packages                                         | `Ctrl+Alt+N O`                    | `Cmd+Alt+N O`               |
+| `atom-npm:run`                  | Run script                                                        | `Ctrl+Alt+N R`                    | `Cmd+Alt+N R`               |
 
 ## Multi-project support
 
