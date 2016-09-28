@@ -2,6 +2,7 @@
 
 [![dependencies Status](https://david-dm.org/tomi77/atom-npm/status.svg)](https://david-dm.org/tomi77/atom-npm)
 [![Code Climate](https://codeclimate.com/github/tomi77/atom-npm/badges/gpa.svg)](https://codeclimate.com/github/tomi77/atom-npm)
+![Downloads](https://img.shields.io/apm/dm/atom-npm.svg)
 
 NPM integration for Atom.
 
