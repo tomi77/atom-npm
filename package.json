@@ -22,7 +22,6 @@
   "dependencies": {
     "atom-npm-client-api": "^0.1.0",
     "atom-space-pen-views": "^2.2.0",
-    "lodash": "^4.15.0",
-    "promise": "^7.1.1"
+    "lodash": "^4.15.0"
   }
 }

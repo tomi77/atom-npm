@@ -38,21 +38,19 @@ module.exports =
     confirmed: ({script, pkg}) ->
       @cancel()
 
-      info = atom.notifications.addInfo "npm run #{script} (#{pkg.name or pkg.wd})",
+      info = atom.notifications.addInfo "npm run #{script} @ #{pkg.name or pkg.wd}",
         detail: "Running..."
         dismissable: yes
 
-      pkg.once 'exit', (status, stdout, stderr) =>
-        info.dismiss()
-
-        if status
-          atom.notifications.addError "npm run #{script} (#{pkg.name or pkg.wd})",
-            detail: stdout
-            dismissable: yes
-        else
-          atom.notifications.addSuccess "npm run #{script} (#{pkg.name or pkg.wd})",
-            detail: stdout
-            dismissable: yes
-
       pkg.run script
+      .then ({stdout, stderr}) ->
+        info.dismiss()
+        atom.notifications.addSuccess "npm run #{script} @ #{pkg.name or pkg.wd}",
+          detail: stdout
+          dismissable: yes
+      .catch ({code, stdout, stderr}) ->
+        info.dismiss()
+        atom.notifications.addError "npm run #{script} @ #{pkg.name or pkg.wd}",
+          detail: stderr
+          dismissable: yes
       return
