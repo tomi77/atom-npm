@@ -1,6 +1,7 @@
 ## master
 
-* extract `npm-client-api` to it's own package
+* Extract `npm-client-api` to it's own package
+* Rename "Atom NPM" to "NPM"
 
 ## 0.3.1
 
