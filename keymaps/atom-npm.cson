@@ -1,11 +1,11 @@
 ".platform-darwin":
-  "cmd-alt-n r": "atom-npm:run"
-  "cmd-alt-n i": "atom-npm:install-dependencies"
-  "cmd-alt-n u": "atom-npm:update-dependencies"
-  "cmd-alt-n o": "atom-npm:outdated"
+  "cmd-alt-n r": "npm:run"
+  "cmd-alt-n i": "npm:install-dependencies"
+  "cmd-alt-n u": "npm:update-dependencies"
+  "cmd-alt-n o": "npm:outdated"
 
 ".platform-linux, .platform-win32":
-  "ctrl-alt-n r": "atom-npm:run"
-  "ctrl-alt-n i": "atom-npm:install-dependencies"
-  "ctrl-alt-n u": "atom-npm:update-dependencies"
-  "ctrl-alt-n o": "atom-npm:outdated"
+  "ctrl-alt-n r": "npm:run"
+  "ctrl-alt-n i": "npm:install-dependencies"
+  "ctrl-alt-n u": "npm:update-dependencies"
+  "ctrl-alt-n o": "npm:outdated"

@@ -8,10 +8,10 @@
   ],
   "activationCommands": {
     "atom-workspace": [
-      "atom-npm:run",
-      "atom-npm:outdated",
-      "atom-npm:install-dependencies",
-      "atom-npm:update-dependencies"
+      "npm:run",
+      "npm:outdated",
+      "npm:install-dependencies",
+      "npm:update-dependencies"
     ]
   },
   "repository": "https://github.com/tomi77/atom-npm.git",

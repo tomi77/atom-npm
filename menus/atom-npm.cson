@@ -1,19 +1,19 @@
 "menu": [
   "label": "Packages"
   "submenu": [
-    "label": "Atom NPM"
+    "label": "NPM"
     "submenu": [
-      "label": "Run"
-      "command": "atom-npm:run"
+      "label": "Run <script>"
+      "command": "npm:run"
     ,
       "label": "Outdated"
-      "command": "atom-npm:outdated"
+      "command": "npm:outdated"
     ,
       "label": "Install Dependencies"
-      "command": "atom-npm:install-dependencies"
+      "command": "npm:install-dependencies"
     ,
       "label": "Update Dependencies"
-      "command": "atom-npm:update-dependencies"
+      "command": "npm:update-dependencies"
     ]
   ]
 ]
